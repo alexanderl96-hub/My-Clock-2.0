@@ -43,7 +43,7 @@ const Home = () => {
             setCurrentTime(now.getHours() > 12 ? now.getHours() - 12 : now.getHours())
             setCurrentMin(now.getHours() > 12 ? `${now.getMinutes() < 10 ? '0'.concat(now.getMinutes() ) : now.getMinutes()  }pm ` :
              `${now.getMinutes() < 10 ? '0'.concat(now.getMinutes() ) : now.getMinutes()  }am ` )
-            setCount(count + 1);}, 1000);
+            setCount(count + 1);}, 100000000);
             return ()=> clearInterval(interval);
     },[count])
 
