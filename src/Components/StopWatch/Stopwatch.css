@@ -1,0 +1,83 @@
+.stopwatch-container{
+    margin-top: 8px;
+    height: 480px;
+    padding: 3px;
+}
+::-webkit-scrollbar{
+    width: 2px;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 40px; 
+}
+.stopwatch-container-MainWacher{ 
+    height: 350px;
+    border: .3px solid;
+    border-top-color: transparent;
+    border-bottom-color: #cccccc35;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+.stopwatch-container-watcher{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 270px;
+    
+}
+.stopwatch-container-watcher > div{
+    font-size: 60px;
+}
+.stopwatch-container-second{
+    display:flex; 
+    justify-content: space-around;
+    align-items: center;
+}
+.stopwatch-container-second-first{
+    display:flex; 
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    background-color: #5151516b;
+    border-radius: 50px;
+    font-size: 15px;
+    border-style: double ;
+    border-color:  black;
+}
+.stopwatch-container-second-third{
+    display:flex; 
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    background-color: rgb(9, 49, 11);
+    border-radius: 50px;
+    font-size: 15px;
+    border-style: double ;
+    border-color:  black;
+}
+.stopwatch-container-lap{
+    overflow-y: scroll;
+    height: 200px;
+}
+.stopwatch-container-lap-first{
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    border: .2px solid;
+    border-top-color: transparent;
+    border-bottom-color: #cccccc35;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+.stopwatch-container-lap-first-first{
+    font-size: 14px;
+    margin-left: 10px;
+}
+.stopwatch-container-lap-first-second{
+    display: flex;
+    margin-right: 10px ;
+    font-size: 14px;
+}

@@ -1,0 +1,138 @@
+.clock-container{
+    margin-top: 8px;
+}
+
+::-webkit-scrollbar{
+    width: 3px;
+}
+::-webkit-scrollbar-thumb{
+    background: #cccccc5d;
+    border-radius: 40px;
+}
+.clock-container-nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.clock-container-nav-edit{
+    display: flex;
+    font-size: 14.5px;
+    font-Weight: 400;
+    color: #f6b600;
+    cursor: pointer;
+}
+.clock-container-contries{
+    overflow-y: scroll;
+    height: 525px;
+    /* position: absolute; */
+    /* border: .3px solid;
+    border-top-color: #cccccc7c;
+    border-bottom-color: #cccccc7c;
+    border-right-color: transparent;
+    border-left-color: transparent; */
+}
+.clock-container-worldClock{
+    display:flex;
+    justify-content: flex-start;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #fff;
+    border: .3px solid;
+    border-top-color: transparent;
+    border-bottom-color: #cccccc35;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+.clock-container-card{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border: .3px solid;
+    border-top-color: transparent;
+    border-bottom-color: #cccccc35;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+.clock-container-card-first{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.clock-container-card-first-Day{
+    text-align: start;
+    color: #cccccc90;
+    font-size: 11px;
+    margin-left: 11px;
+}
+.clock-container-card-first-Place{
+    text-align: start;
+    font-size: 17px;
+    font-weight: 500;
+    margin-left: 12px;
+}
+.clock-container-card-second{
+    display: flex;
+    margin-right: 15px;
+}
+.clock-container-card-second-Time{
+font-size: 30px;
+font-weight: 400;
+letter-spacing: 1px;
+width: 35px;
+}
+.clock-container-card-second-Time2{
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    width: 45px;
+    }
+.clock-container-card-second-Format{
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.contries-Container-contries {
+    letter-spacing: .5px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.contries-Container-contries:hover {
+    background-color: #cccccc35;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.contries-Container{
+    float: left;
+    overflow-y: scroll;
+    background-color: #4f4848e2;
+    float: left;
+    margin: 0 auto;
+    color: #cccccc;
+    border-radius: 5px;
+    height: 320px;
+    width: 325px;
+    padding: 0 10px 10px;
+    position: absolute;
+    top: 90px;
+    left: 37.4%;
+    z-index: 100;
+    -webkit-filter: drop-shadow(0px 1px 2px rgba(130,130,130,1));
+    filter        : drop-shadow(0px 1px 2px rgba(130,130,130,1));  
+}
+.contries-Container::before{
+    content: "";
+    position: relative;
+    left: 85px;
+    top: 40px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    background-color: transparent;
+    border-bottom: 15px solid #4f484800;
+}

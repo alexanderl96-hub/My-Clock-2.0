@@ -1,0 +1,44 @@
+.container {
+   max-width: 428px;
+   min-width: 360px;
+   min-height: 640px;
+   max-height: 926px;
+   border: 3px solid #cccccc;
+   border-radius: 10px;
+   height: 300px;
+   padding: 5px;
+}
+/* container UP */
+.container-time{
+    display:flex;
+    justify-content: space-between;
+}
+.container-time-current{
+    font-size: 15px;
+}
+.container-time-inside{
+    display:flex;
+    gap:10px;
+}
+
+/* container Middle */
+.container-page{
+    height: 575px
+}
+
+
+/* container Footer */
+.container-footer{
+    display:flex;
+    justify-content: space-evenly;
+}
+.container-footer > div{
+    cursor: pointer;
+}
+
+.colorPalette{
+    color: #f6b600;
+}
+.colorPalette2{
+    color: #cccccc;
+}
