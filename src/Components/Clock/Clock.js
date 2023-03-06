@@ -1,14 +1,14 @@
-import React, {useState, useEffect, useDeferredValue} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Clock.css'
 import { FaPlus } from 'react-icons/fa';
-const places = ['Ottawa', 'Toronto', 'Nuuk','Mexico', 'Washington', 'New York', 'The Valley', 'Saint John`s', 'Oranjestad', 'Nassau',
+const places = ['Ottawa','Cuba','Toronto', 'Nuuk','Mexico', 'Washington', 'New York', 'The Valley', 'Saint John`s', 'Oranjestad', 'Nassau',
 'Bridgetown', 'Hamilton', 'Road Town', 'George Town', 'Havana', 'Willemstad', 'Roseau', 'Santo Domingo', 'Moscu', 'Yerevan', 'Baku', 'Jerusalem', 'Damascus', 'Abu Dhabi', 'Kabul', 'Hong Kong', 'Beijing', 'Tokyo', 'Seoul',
 'Singapore', 'Bangkok', 'Kaula Lumpur', 'Vientiane', 'Colombo', 'Taipei', 'Pyongyang', 'Copenhagen', 'Helsinki', 'Dublin (City)', 'Oslo', 'Stockholm', 'London', 'Birmingham', 'Manchester', 'Vienna', 
 'Brussels', 'Paris', 'Berlin', 'Luxembourg', 'Amsterdam', 'The Hague', 'Minsk', 'Prague', 'Bucharest', 'Athenas', 'Rome', 'Milan', 
 'Monaco', 'Madrid', 'Algiers', 'Cairo', 'Tripoli', 'Rabat', 'Khartoum', 'Tunis', 'Porto-Novo', 'Cotonou', 'Ouagadougou', 'Praia',
 'Yamoussoukro', 'Abidjan', 'Banjul', 'Accra', 'Conakry', 'Bissau', 'Monrovia', 'Bamako', 'Nouakchott', 'Niamey', 'Canberra', 'Sydney', 'Wellington', 'Auckland', 'Suva', 'Port Moresby', 'Majuro']
 const America = ['Ottawa', 'Toronto', 'Nuuk','Mexico', 'Washington', 'New York', 'The Valley', 'Saint John`s', 'Oranjestad', 'Nassau',
-                'Bridgetown', 'Hamilton', 'Road Town', 'George Town', 'Havana', 'Willemstad', 'Roseau', 'Santo Domingo' ]
+                'Bridgetown', 'Hamilton', 'Road Town', 'George Town', 'Havana', 'Willemstad', 'Roseau', 'Santo Domingo', 'Cuba' ]
 const Asia = ['Moscu', 'Yerevan', 'Baku', 'Jerusalem', 'Damascus', 'Abu Dhabi', 'Kabul', 'Hong Kong', 'Beijing', 'Tokyo', 'Seoul',
              'Singapore', 'Bangkok', 'Kaula Lumpur', 'Vientiane', 'Colombo', 'Taipei', 'Pyongyang']
 const Europe = ['Copenhagen', 'Helsinki', 'Dublin (City)', 'Oslo', 'Stockholm', 'London', 'Birmingham', 'Manchester', 'Vienna', 
@@ -19,11 +19,21 @@ const Africa = ['Algiers', 'Cairo', 'Tripoli', 'Rabat', 'Khartoum', 'Tunis', 'Po
 // const Antarctica = ['New Zealand', 'Chile', 'Argentina', '']
 const Australia = [ 'Canberra', 'Sydney', 'Wellington', 'Auckland', 'Suva', 'Port Moresby', 'Majuro']
 
+const myoffset = ['+14', '+13', '+12.45', '+12', '+11', '+10:30', '+10', '+9.30', '+9', '+8.45', '+8', '+7','+6.30', '+6','+5.45','+5.30',
+ '+5', '+4.30', '+4', '+3.30', '+3', '+2', '+1','+0', '-1', '-2', '-3', '-3.30','-4', '-5', '-6', '-7', '-8', '-9','-9.3', '-10', 
+ '-11', '-12']
+ const offset5up = ['Cuba']
+ const offset13up = []
+ const offset12up = []
+ const offset11up = []
+
+
 const Clock = () => {
     const now = new Date();
     const [timeZone, setTimeZone] = useState('America/New_york')
     const [addPlaces, setAddPlaces] = useState([])
     const [gethoursDiferent, setGetHoursDiferent] = useState('')
+    const [offt, setOfft] = useState('')
   
    
     const options = {timeZone: `${timeZone}`, dateStyle: 'short',  timeStyle: 'full', hourCycle: 'h24', }
@@ -37,7 +47,10 @@ function handelContries(e){
     let day = ''
     let value = e.target.id
     let different = ''
-
+    setGetHoursDiferent(value)
+    // if(offset5up.includes(gethoursDiferent)){
+    //     setOfft('+0')
+    // }
     console.log( value.split(' ').length === 2 ? value.split(' ')[0].concat(`_${value.split(' ')[1].toLowerCase()}`) : value , 'check value')
     if(America.includes(value)){
         setTimeZone(`America/${value}`)
@@ -84,7 +97,7 @@ function handelContries(e){
 
         if(now.getDate() <  now.toLocaleString('en-US', options)[2]){
             day = 'Tomorrow'
-        }else if(now.getDate() ===  now.toLocaleString('en-US', options)[2]){
+        }else if(now.getDate() >  now.toLocaleString('en-US', options)[2]){
         day = 'Yesterday'
         }else{
         day = 'Today'
@@ -92,28 +105,28 @@ function handelContries(e){
 
         let newPlaceHour = now.toLocaleString('en-US', options).split(',')[1].slice(1,3)
         let newPlaceMin = now.toLocaleString('en-US', options).split(',')[1].slice(4,6)
-        
-        if(now.getHours() < Number(newPlaceHour)){
-            different = `+${newPlaceHour - now.getHours()}`  
-         }else if(now.getHours() > Number(newPlaceHour)){
-            different = `-${now.getHours() - newPlaceHour}`
-         }else if(now.getHours() === Number(newPlaceHour)){
-            different = '-0'
+        console.log(newPlaceHour)
+
+        if(now.getHours() <= (Number(newPlaceHour)-1) &&  day === 'Today'){
+            different = `+${ (Number(newPlaceHour)-1) - now.getHours() }`  
+         }else if(now.getHours() >= Number(newPlaceHour) &&  day === 'Tomorrow'){
+            different = `+${Number(newPlaceHour) + 12}`
+         }else if(now.getHours() <= Number(newPlaceHour) &&  day === 'Tomorrow'){
+            different  =  `+${(12 - now.getHours()) + (12 - Number(newPlaceHour))}`
+         }
+         else {
+            different = `-${now.getHours() -  (Number(newPlaceHour)-1)}`
          }
 
-       console.log(different, now.getHours())
-        console.log(newPlaceHour, 'check hour place')
-        newPlaceMin =  newPlaceHour > 12 && newPlaceHour < 24 ? ':'+newPlaceMin+'pm' : ':'+newPlaceMin+'am'
+        newPlaceMin = Number(newPlaceHour)  > 12 ? ':'+newPlaceMin+'pm' : ':'+newPlaceMin+'am'
 
-        if(Number(newPlaceHour) === 24){
-            newPlaceHour = Number(newPlaceHour) - 24
-        }else if(Number(newPlaceHour) > 12 && Number(newPlaceHour) < 24){
+        if( Number(newPlaceHour)  >= 12 ){
             newPlaceHour = Number(newPlaceHour) - 12
+        }else if( Number(newPlaceHour)  < 12){
+            newPlaceHour = Number(newPlaceHour)
         }
 
          newPlaceHour = Number(newPlaceHour) < 10 ? '0'.concat(Number(newPlaceHour)) : Number(newPlaceHour)
-
-        
 
         store.push(day, value, newPlaceHour, newPlaceMin, different)
 
@@ -231,7 +244,7 @@ function handelContries(e){
     useEffect(()=>{
         const interval = setInterval(()=> {
             setCount(count + 1)
-           ;}, 100000000);
+           ;}, 100);
             return ()=> clearInterval(interval);
     },[count])
 

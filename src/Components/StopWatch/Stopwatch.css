@@ -26,7 +26,10 @@
 }
 .stopwatch-container-watcher > div{
     font-size: 60px;
+     width: 85px;
+    font-weight: 200;
 }
+
 .stopwatch-container-second{
     display:flex; 
     justify-content: space-around;
@@ -43,6 +46,22 @@
     font-size: 15px;
     border-style: double ;
     border-color:  black;
+    cursor:pointer;
+}
+
+.stopwatch-container-second-first2{
+    display:flex; 
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    background-color: #3434346b;
+    border-radius: 50px;
+    font-size: 15px;
+    border-style: double ;
+    border-color:  black;
+    cursor:pointer;
+    color: #626060;
 }
 .stopwatch-container-second-third{
     display:flex; 
@@ -50,11 +69,27 @@
     align-items: center;
     height: 60px;
     width: 60px;
-    background-color: rgb(9, 49, 11);
+    color: rgb(3, 147, 3);
+    background-color: rgba(9, 49, 11, 0.851);
     border-radius: 50px;
     font-size: 15px;
     border-style: double ;
     border-color:  black;
+    cursor:pointer;
+}
+.stopwatch-container-second-third2{
+    display:flex; 
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    color: red;
+    background-color: rgba(90, 8, 14, 0.716);
+    border-radius: 50px;
+    font-size: 15px;
+    border-style: double ;
+    border-color:  black;
+    cursor:pointer;
 }
 .stopwatch-container-lap{
     overflow-y: scroll;
@@ -72,6 +107,7 @@
     border-right-color: transparent;
     border-left-color: transparent;
 }
+
 .stopwatch-container-lap-first-first{
     font-size: 14px;
     margin-left: 10px;
@@ -80,4 +116,5 @@
     display: flex;
     margin-right: 10px ;
     font-size: 14px;
+    width: 85px;
 }
