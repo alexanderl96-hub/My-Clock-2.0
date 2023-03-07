@@ -32,6 +32,7 @@
 .container-footer{
     display:flex;
     justify-content: space-evenly;
+    gap: 20px;
 }
 .container-footer > div{
     cursor: pointer;
@@ -44,5 +45,8 @@
     color: #cccccc;
 }
 .clockComponent-icon{
-    font-size: 25px;
+    font-size: 27px;
+}
+.timerComponent{
+    font-size: 13px;
 }

@@ -69,15 +69,15 @@ const Home = () => {
      <div className='container-footer'>
     <div id='clockComponent'  className={ clockComponent === 'true' ? 'colorPalette':  'colorPalette2'} onClick={handelPages}>
             <div id='clockComponent' ><FaGlobe  className='clockComponent-icon' /></div>
-            <div id='clockComponent'>Clock</div>
+            <div id='clockComponent' className='timerComponent'>Clock</div>
         </div>
         <div id='stopwatchComponent' className={ stopwatchComponent === 'true' ? 'colorPalette':  'colorPalette2'} onClick={handelPages}>
             <div id='stopwatchComponent'><FaStopwatch  className='clockComponent-icon' /></div>
-            <div id='stopwatchComponent'>StopWatch</div>
+            <div id='stopwatchComponent' className='timerComponent'>Stopwatch</div>
         </div>
         <div id='timerComponent' className={ timerComponent === 'true' ? 'colorPalette':  'colorPalette2'} onClick={handelPages} >
             <div id='timerComponent'><FaStopwatch20 className='clockComponent-icon' /></div>
-            <div id='timerComponent'>Timer</div>
+            <div id='timerComponent'  className='timerComponent'>Timer</div>
         </div>
      </div>
     </div>

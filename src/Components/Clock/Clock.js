@@ -36,7 +36,7 @@ const Clock = () => {
     const [offt, setOfft] = useState('')
   
    
-    const options = {timeZone: `${timeZone}`, dateStyle: 'short',  timeStyle: 'full', hourCycle: 'h24', }
+    const options = {timeZone: `${timeZone}`, dateStyle: 'short',  timeStyle: 'full', hourCycle: 'h12', }
     const [edit, setEdit] = useState('false')
     const [morePlaces, setMorePlaces] = useState('false')
 
@@ -44,56 +44,153 @@ const Clock = () => {
 
 function handelContries(e){
      let store = []
+     let currentHour = 0
     let day = ''
     let value = e.target.id
     let different = ''
+    let hour = 0
+    let minute = 0
+    let format = ''
+    let currentFormat = ''
     setGetHoursDiferent(value)
-    // if(offset5up.includes(gethoursDiferent)){
-    //     setOfft('+0')
-    // }
-    console.log(now.toLocaleString('en-US', options))
-    console.log( value.split(' ').length === 2 ? value.split(' ')[0].concat(`_${value.split(' ')[1].toLowerCase()}`) : value , 'check value')
+       
+
+     if(now.getHours()  < 12){
+        currentHour =  now.getHours() 
+        currentFormat = 'AM'
+     }else {
+        currentHour = now.getHours() - 12
+        currentFormat = 'PM'
+     }
+ 
+
     if(America.includes(value)){
         setTimeZone(`America/${value}`)
         setMorePlaces('false')
-
+        
              
         if(now.getDate() <  now.toLocaleString('en-US', options)[2]){
             day = 'Tomorrow'
-        }else if(now.getDate() ===  now.toLocaleString('en-US', options)[2]){
+        }else if(now.getDate() >  now.toLocaleString('en-US', options)[2]){
         day = 'Yesterday'
         }else{
         day = 'Today'
         }
 
-        let newPlaceHour = now.toLocaleString('en-US', options).split(',')[1].slice(1,3)
-        let newPlaceMin = now.toLocaleString('en-US', options).split(',')[1].slice(4,6)
-        if(Number(newPlaceHour) === now.getHours() ){
-            setGetHoursDiferent('0')
-        }
+        hour = Number(now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[0])
+        minute = Number( now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[1])
+        format = now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[1]
+    
+        // if( hour === now.getHours() ){
+        //     setGetHoursDiferent('0')
+        // }
 
-        console.log(newPlaceHour, 'check hour place')
-        newPlaceMin =  newPlaceHour > 12 &&  newPlaceHour !== 0 ? ':'+newPlaceMin+'pm' : ':'+newPlaceMin+'am'
-        if(Number(newPlaceHour) === 24){
-            newPlaceHour = Number(newPlaceHour) - 24
-        }else if(Number(newPlaceHour) > 12 && Number(newPlaceHour) < 24){
-            newPlaceHour = Number(newPlaceHour) - 12
-        }
-        
 
-         newPlaceHour = Number(newPlaceHour) < 10 ? '0'.concat(Number(newPlaceHour)) : Number(newPlaceHour)
+    //   console.log(currentHour, hour)
 
-         if(now.getHours() < newPlaceHour){
-            different =  newPlaceHour - now.getHours()  
-         }else{
-            different = now.getHours() - newPlaceHour
-         }
+        //  if(currentHour < hour && day === 'Today' && currentFormat === 'PM'  && format === 'PM' ){
+        //     different =  `-${hour - currentHour}`
+        //  }else if(currentHour < hour && day === 'Today' && currentFormat === 'AM' && format === 'AM' ){
+        //     different =  `-${hour - currentHour}`
+        //  } else  if(currentHour < hour && day === 'Today'  && currentFormat === 'PM' && format === 'AM'){
+        //     different =  `+${(hour - currentHour) + 12}`
+        //  }  else  if(currentHour < hour && day === 'Today' && currentFormat === 'AM' && format === 'PM' ){
+        //     different =  `-${(hour - currentHour) + 12}`
+        //  }
 
-        store.push(day, value, newPlaceHour, newPlaceMin, different)
+         
+        //  else  if(currentHour < hour && day === 'Yesterday'  && currentFormat === 'AM' && format === 'PM'){
+        //     different =  `-${(hour - currentHour) + 12}`
+        //  }
+         
+
+        //  else  if(currentHour < hour && day === 'Tomorrow' && format === 'PM' && currentFormat === 'PM'){
+        //     different =  `+${ 24 - (hour - currentHour) }`
+        //  }else  if(currentHour < hour && day === 'Tomorrow' && format === 'AM' && currentFormat === 'AM'){
+        //     different =  `+${ 24 -(hour - currentHour) }`
+        //  }else  if(currentHour < hour && day === 'Tomorrow' && format === 'AM' && currentFormat === 'PM'){
+        //     different =  `+${12 - (hour - currentHour)}`
+        //  }
+         
+         
+        //  if(currentHour > hour && day === 'Today'  && currentFormat === 'PM' && format === 'PM'){
+        //     different =  `+ ${ currentHour - hour}`
+        //  }else if(currentHour > hour && day === 'Today' && currentFormat === 'AM' && format === 'AM'){
+        //     different =  `+ ${currentHour - hour}`
+        //  } else  if(currentHour > hour && day === 'Today' && currentFormat === 'PM' && format === 'AM'){
+        //     different =  `-${12 - (currentHour - hour)}`
+        //  }  else  if(currentHour > hour && day === 'Today' && currentFormat === 'AM' && format === 'PM'){
+        //     different =  `+${(currentHour - hour) + 12}`
+        //  }
+
+   
+        //  else  if(currentHour > hour && day === 'Yesterday'  && currentFormat === 'AM' && format === 'PM'){
+        //     different =  `-${(currentHour - hour) + 12}`
+        //  }  else  if(currentHour > hour && day === 'Yesterday'  && currentFormat === 'AM' && format === 'PM'){
+        //     different =  `-${24 - (currentHour - hour)}`
+        //  }  else  if(currentHour > hour && day === 'Yesterday'  && currentFormat === 'AM' && format === 'PM'){
+        //     different =  `-${24 - (currentHour - hour)}`
+        //  }
+         
+        //  else  if(currentHour > hour && day === 'Tomorrow' && currentFormat === 'PM' && format === 'AM'){
+        //     different =  `+${(currentHour - hour) + 12}`
+        //  }
+
+
+        //  else if(currentHour === hour && day === 'Today' && currentFormat === 'AM'  && format === 'AM' ){
+        //     different =  `+${0}`
+        //  }else if(currentHour === hour && day === 'Today' && currentFormat === 'AM'  && format === 'AM' ){
+        //     different =  `+${0}`
+        //  }else if(currentHour === hour && day === 'Today' && currentFormat === 'PM'  && format === 'AM' ){
+        //     different =  `-${12}`
+        //  }else if(currentHour === hour && day === 'Today' && currentFormat === 'AM'  && format === 'PM' ){
+        //     different =  `+${12}`
+        //  }
+
+        //  else if(currentHour === hour && day === 'Yesterday' && currentFormat === 'AM'  && format === 'PM' ){
+        //     different =  `-${12}`
+        //  } else if(currentHour === hour && day === 'Yesterday' && currentFormat === 'PM'  && format === 'AM' ){
+        //     different =  `-${12}`
+        //  } else if(currentHour === hour && day === 'Yesterday' && currentFormat === 'AM'  && format === 'AM' ){
+        //     different =  `-${24}`
+        //  } else if(currentHour === hour && day === 'Yesterday' && currentFormat === 'PM'  && format === 'PM' ){
+        //     different =  `-${24}`
+        //  } 
+
+        //  else  if(currentHour === hour && day === 'Tomorrow' && currentFormat === 'AM' && format === 'AM'){
+        //     different =  `+${24}`
+        //  } else  if(currentHour === hour && day === 'Tomorrow' && currentFormat === 'PM' && format === 'AM'){
+        //     different =  `+${12}`
+        //  } else  if(currentHour === hour && day === 'Tomorrow' && currentFormat === 'AM' && format === 'AM'){
+        //     different =  `+${24}`
+        //  } else  if(currentHour === hour && day === 'Tomorrow' && currentFormat === 'PM' && format === 'PM'){
+        //     different =  `+${24}`
+        //  }
+
+        //  console.log(different)
+        store.push(day, value, hour , minute, format, )
 
 
     }else if(Asia.includes(value)){
         setTimeZone(`Asia/${value}`)
+        setMorePlaces('false')
+     
+        if(now.getDate() <  now.toLocaleString('en-US', options)[2]){
+            day = 'Tomorrow'
+        }else if(now.getDate() >  now.toLocaleString('en-US', options)[2]){
+        day = 'Yesterday'
+        }else{
+        day = 'Today'
+        }
+
+        hour = Number(now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[0])
+        minute = Number( now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[1])
+        format = now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[1]
+
+        store.push(day, value, hour , minute, format, )
+
+    }else if(Africa.includes(value)){
+        setTimeZone(`Africa/${value}`)
         setMorePlaces('false')
 
         if(now.getDate() <  now.toLocaleString('en-US', options)[2]){
@@ -103,137 +200,46 @@ function handelContries(e){
         }else{
         day = 'Today'
         }
-       
 
-        let newPlaceHour = now.toLocaleString('en-US', options).split(',')[1].slice(1,3)
-        let newPlaceMin = now.toLocaleString('en-US', options).split(',')[1].slice(4,6)
-        console.log(newPlaceHour)
+        hour = Number(now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[0])
+        minute = Number( now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[1])
+        format = now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[1]
 
-        if(now.getHours() <= (Number(newPlaceHour)-1) &&  day === 'Today'){
-            different = `+${ (Number(newPlaceHour)-1) - now.getHours() }`  
-         }else if(now.getHours() >= Number(newPlaceHour) &&  day === 'Tomorrow'){
-            different = `+${Number(newPlaceHour) + 12}`
-         }else if(now.getHours() <= Number(newPlaceHour) &&  day === 'Tomorrow'){
-            different  =  `+${(12 - now.getHours()) + (12 - Number(newPlaceHour))}`
-         }
-         else {
-            different = `-${now.getHours() -  (Number(newPlaceHour)-1)}`
-         }
+        store.push(day, value, hour , minute, format, )
 
-        newPlaceMin = Number(newPlaceHour)  > 12 ? ':'+newPlaceMin+'pm' : ':'+newPlaceMin+'am'
-
-        if( Number(newPlaceHour)  >= 12 ){
-            newPlaceHour = Number(newPlaceHour) - 12
-        }else if( Number(newPlaceHour)  < 12){
-            newPlaceHour = Number(newPlaceHour)
-        }
-
-         newPlaceHour = Number(newPlaceHour) < 10 ? '0'.concat(Number(newPlaceHour)) : Number(newPlaceHour)
-
-        store.push(day, value, newPlaceHour, newPlaceMin, different)
-
-    }else if(Africa.includes(value)){
-        setTimeZone(`Africa/${value}`)
-        setMorePlaces('false')
-
-        if(now.getDate() <  now.toLocaleString('en-US', options)[2]){
-            day = 'Tomorrow'
-        }else if(now.getDate() ===  now.toLocaleString('en-US', options)[2]){
-        day = 'Yesterday'
-        }else{
-        day = 'Today'
-        }
-
-        let newPlaceHour = now.toLocaleString('en-US', options).split(',')[1].slice(1,3)
-        let newPlaceMin = now.toLocaleString('en-US', options).split(',')[1].slice(4,6)
-        if(Number(newPlaceHour) === now.getHours() ){
-            setGetHoursDiferent('0')
-        }
-        
-        if(Number(newPlaceHour) === 24){
-            newPlaceHour = Number(newPlaceHour) - 24
-        }else if(Number(newPlaceHour) > 12 && Number(newPlaceHour) < 24){
-            newPlaceHour = Number(newPlaceHour) - 12
-        }
-         newPlaceMin =  newPlaceHour > 12 ? ':'+newPlaceMin+'pm' : ':'+newPlaceMin+'am'
-
-         newPlaceHour = Number(newPlaceHour) < 10 ? '0'.concat(Number(newPlaceHour)) : Number(newPlaceHour)
-
-         if(now.getHours() < newPlaceHour){
-            different =  newPlaceHour - now.getHours()  
-         }else{
-            different = now.getHours() - newPlaceHour
-         }
-
-        store.push(day, value, newPlaceHour, newPlaceMin, different)
     }else if(Australia.includes(value)){
         setTimeZone(`Australia/${value}`)
         setMorePlaces('false')
         if(now.getDate() <  now.toLocaleString('en-US', options)[2]){
             day = 'Tomorrow'
-        }else if(now.getDate() ===  now.toLocaleString('en-US', options)[2]){
+        }else if(now.getDate() >  now.toLocaleString('en-US', options)[2]){
         day = 'Yesterday'
         }else{
         day = 'Today'
         }
 
-        let newPlaceHour = now.toLocaleString('en-US', options).split(',')[1].slice(1,3)
-        let newPlaceMin = now.toLocaleString('en-US', options).split(',')[1].slice(4,6)
-        if(Number(newPlaceHour) === now.getHours() ){
-            setGetHoursDiferent('0')
-        }
-        
-        if(Number(newPlaceHour) === 24){
-            newPlaceHour = Number(newPlaceHour) - 24
-        }else if(Number(newPlaceHour) > 12 && Number(newPlaceHour) < 24){
-            newPlaceHour = Number(newPlaceHour) - 12
-        }
-         newPlaceMin =  newPlaceHour > 12 ? ':'+newPlaceMin+'pm' : ':'+newPlaceMin+'am'
+        hour = Number(now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[0])
+        minute = Number( now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[1])
+        format = now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[1]
 
-         newPlaceHour = Number(newPlaceHour) < 10 ? '0'.concat(Number(newPlaceHour)) : Number(newPlaceHour)
+        store.push(day, value, hour , minute, format, )
 
-         if(now.getHours() < newPlaceHour){
-            different =  newPlaceHour - now.getHours()  
-         }else{
-            different = now.getHours() - newPlaceHour
-         }
-
-        store.push(day, value, newPlaceHour, newPlaceMin, different)
     }else if(Europe.includes(value)){
         setTimeZone(`Europe/${value}`)
         setMorePlaces('false')
         if(now.getDate() <  now.toLocaleString('en-US', options)[2]){
             day = 'Tomorrow'
-        }else if(now.getDate() ===  now.toLocaleString('en-US', options)[2]){
+        }else if(now.getDate() >  now.toLocaleString('en-US', options)[2]){
         day = 'Yesterday'
         }else{
         day = 'Today'
         }
 
-        let newPlaceHour = now.toLocaleString('en-US', options).split(',')[1].slice(1,3)
-        let newPlaceMin = now.toLocaleString('en-US', options).split(',')[1].slice(4,6)
-        if(Number(newPlaceHour) === now.getHours() ){
-            setGetHoursDiferent('0')
-        }
-        console.log(newPlaceHour, 'check hour place')
-        newPlaceMin =  newPlaceHour > 12 && newPlaceHour < 24 ? ':'+newPlaceMin+'pm' : ':'+newPlaceMin+'am'
+        hour = Number(now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[0])
+        minute = Number( now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[0].split(':')[1])
+        format = now.toLocaleString('en-US', options).split(',')[1].trim().split(' ')[1]
 
-        if(Number(newPlaceHour) === 24){
-            newPlaceHour = Number(newPlaceHour) - 24
-        }else if(Number(newPlaceHour) > 12 && Number(newPlaceHour) < 24){
-            newPlaceHour = Number(newPlaceHour) - 12
-        }
-        
-
-         newPlaceHour = Number(newPlaceHour) < 10 ? '0'.concat(Number(newPlaceHour)) : Number(newPlaceHour)
-
-         if(now.getHours() < newPlaceHour){
-            different =  newPlaceHour - now.getHours()  
-         }else{
-            different = now.getHours() - newPlaceHour
-         }
-
-        store.push(day, value, newPlaceHour, newPlaceMin, different)
+        store.push(day, value, hour , minute, format, )
     }
 
     addPlaces.push(store)
@@ -249,20 +255,20 @@ function handelContries(e){
            ;}, 100);
             return ()=> clearInterval(interval);
     },[count])
-
+ console.log(addPlaces)
 
   return (
     <div className="clock-container">
         <div className="clock-container-nav">
             <div className="clock-container-nav-edit">
-              {edit === 'false' && <div onClick={()=> setEdit('true')}>Edit</div>}
-              {edit === 'true' && <div onClick={()=> setEdit('false')}>Delete</div>}
+              {edit === 'false'   && addPlaces.length > 0 && <div onClick={()=> setEdit('true')}>Edit</div>}
+              {edit === 'true' && addPlaces.length > 0 && <div onClick={()=> setEdit('false')}>Delete</div>}
             </div>
-            <FaPlus className="clock-container-nav-edit" onClick={()=> setMorePlaces('true')} />
+            <FaPlus className="clock-container-nav-edit" onClick={()=> setMorePlaces('true')} onMouseLeave={()=> setMorePlaces('false')} />
         </div>
         <div className="contries-Container-parent">
         {morePlaces === 'true' && <div className='contries-Container'>
-            {places.map((a, index)=>{
+            {places.sort().map((a, index)=>{
                 return(
                          <div id={a} onClick={handelContries} className='contries-Container-contries'>{a}</div>
                 )
@@ -275,31 +281,31 @@ function handelContries(e){
             </div>
 
             <div className="clock-Overflow">
-            <div  >
+                  <div  >
                 
-                <div >
-                    {addPlaces.map((a,index)=>{
-                        return(
-                            <div className="clock-container-card" >
-                                <div className="clock-container-card-first">
-                                     <div className="clock-container-card-first-Day">{a[0]}, {a[4]}HRS </div>
-                                     <div className="clock-container-card-first-Place">{a[1]}</div>
-                                </div>
+                    <div >
+                        {addPlaces.map((a,index)=>{
+                            return(
+                                <div className="clock-container-card" >
+                                    <div className="clock-container-card-first">
+                                        <div className="clock-container-card-first-Day">{a[0]} {a[5]}</div>
+                                        <div className="clock-container-card-first-Place">{a[1]}</div>
+                                    </div>
 
-                                <div className="clock-container-card-second" >  
-                                        <div className="clock-container-card-second-Time">{a[2]}</div>
-                                        <div className="clock-container-card-second-Time2">{a[3].slice(0,-2)}</div> 
-                                     {a[3].slice(-2) === 'pm'  &&  <div className="clock-container-card-second-Format">PM</div>}
-                                     {a[3].slice(-2) === 'am' &&  <div className="clock-container-card-second-Format">AM</div>}
-                                </div> 
-                            </div>
-                         
-                        )
-                    })}
-             </div>
-           </div>
-          
+                                    <div className="clock-container-card-second" >  
+                                            <div className="clock-container-card-second-Time">{a[2] < 10 ? '0'.concat(a[2]): a[2]}:{a[3]< 10 ? '0'.concat(a[3]): a[3]}</div>
+                                            <div className="clock-container-card-second-Format">{a[4]}</div> 
+                                    </div> 
+                                </div>
+                            
+                            )
+                        })}
+                    </div>
+                
+                </div>
+            
             </div>
+           {addPlaces.length === 0 &&  <div className="clock-Overflow-2" > No World Clocks</div>}
         </div>
     </div>
   )
