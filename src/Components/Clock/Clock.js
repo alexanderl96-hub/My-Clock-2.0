@@ -51,6 +51,7 @@ function handelContries(e){
     // if(offset5up.includes(gethoursDiferent)){
     //     setOfft('+0')
     // }
+    console.log(now.toLocaleString('en-US', options))
     console.log( value.split(' ').length === 2 ? value.split(' ')[0].concat(`_${value.split(' ')[1].toLowerCase()}`) : value , 'check value')
     if(America.includes(value)){
         setTimeZone(`America/${value}`)
@@ -102,6 +103,7 @@ function handelContries(e){
         }else{
         day = 'Today'
         }
+       
 
         let newPlaceHour = now.toLocaleString('en-US', options).split(',')[1].slice(1,3)
         let newPlaceMin = now.toLocaleString('en-US', options).split(',')[1].slice(4,6)

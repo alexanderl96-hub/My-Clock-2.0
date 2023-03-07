@@ -58,7 +58,7 @@ const Stopwatch = () => {
     // }
     function handelMillisecond (e){
         if(start === 'true'){
-            if(milliseconds === 215 ){
+            if(milliseconds === 99 ){
               setMilliseconds(0 + 1)
               setSecond(second + 1)
             }else if(second === 59 ){
@@ -76,7 +76,7 @@ const Stopwatch = () => {
         let store = []
       
         if(start === 'true'){
-            if(milliseconds === 215 ){
+            if(milliseconds === 99 ){
               setMilliseconds(0 + 1)
               setSecond(second + 1)
             }else if(second === 59 ){
@@ -139,7 +139,6 @@ const Stopwatch = () => {
     firstplace = store[0]
     secondplace = store[1]
  
-
     console.log(firstplace, secondplace )
    
   }
@@ -165,8 +164,7 @@ console.log(thebestTime())
             <div className='stopwatch-container-watcher'>
                <div className='stopwatch-container-watcher-value'>{minutes ? (minutes < 10 ? '0'.concat(minutes) : minutes) : '00'}:</div>
                <div>{second ? (second < 10 ? '0'.concat(second) : second) : '00'}.</div>
-              {milliseconds < 215 && milliseconds > 10 && <div>{milliseconds ? (milliseconds < 100 ? '0'.concat(milliseconds) : milliseconds ) : '000'}</div>}
-              {milliseconds < 10  && <div>{milliseconds ? (milliseconds < 10 ? '00'.concat(milliseconds) : milliseconds ) : '000'}</div>}
+               <div>{second ? (milliseconds < 10 ? '0'.concat(milliseconds) : milliseconds) : '00'}</div>
             </div>
            <div  className='stopwatch-container-second'>
             {start === 'false' && milliseconds !== 0  && <div 
@@ -191,8 +189,8 @@ console.log(thebestTime())
                      <div className='stopwatch-container-lap-first-second'>
                         <div>{minutes ? (minutes < 10 ? '0'.concat(minutes) : minutes) : '00'}:</div>
                         <div>{second ? (second < 10 ? '0'.concat(second) : second) : '00'}.</div>
-                        {milliseconds < 215 && milliseconds > 10 && <div>{milliseconds ? (milliseconds < 100 ? '0'.concat(milliseconds) : milliseconds ) : '000'}</div>}
-                        {milliseconds < 10  && <div>{milliseconds ? (milliseconds < 10 ? '00'.concat(milliseconds) : milliseconds ) : '000'}</div>}
+                        {milliseconds < 99 && milliseconds > 10 && <div>{milliseconds ? (milliseconds < 99 ? '0'.concat(milliseconds) : milliseconds ) : '00'}</div>}
+                        {milliseconds < 10  && <div>{milliseconds ? (milliseconds < 10 ? '00'.concat(milliseconds) : milliseconds ) : '00'}</div>}
                     </div>
                  </div>}
           

@@ -41,8 +41,8 @@ const Home = () => {
     useEffect(()=>{
         const interval = setInterval(()=> {
             setCurrentTime(now.getHours() > 12 ? now.getHours() - 12 : now.getHours())
-            setCurrentMin(now.getHours() > 12 ? `${now.getMinutes() < 10 ? '0'.concat(now.getMinutes() ) : now.getMinutes()  }pm ` :
-             `${now.getMinutes() < 10 ? '0'.concat(now.getMinutes() ) : now.getMinutes()  }am ` )
+            setCurrentMin(now.getHours() > 12 ? `${now.getMinutes() < 10 ? '0'.concat(now.getMinutes() ) : now.getMinutes()  }` :
+             `${now.getMinutes() < 10 ? '0'.concat(now.getMinutes() ) : now.getMinutes()  }` )
             setCount(count + 1);}, 1);
             return ()=> clearInterval(interval);
     },[count])
@@ -68,15 +68,15 @@ const Home = () => {
 
      <div className='container-footer'>
     <div id='clockComponent'  className={ clockComponent === 'true' ? 'colorPalette':  'colorPalette2'} onClick={handelPages}>
-            <div id='clockComponent' ><FaGlobe /></div>
+            <div id='clockComponent' ><FaGlobe  className='clockComponent-icon' /></div>
             <div id='clockComponent'>Clock</div>
         </div>
         <div id='stopwatchComponent' className={ stopwatchComponent === 'true' ? 'colorPalette':  'colorPalette2'} onClick={handelPages}>
-            <div id='stopwatchComponent'><FaStopwatch /></div>
+            <div id='stopwatchComponent'><FaStopwatch  className='clockComponent-icon' /></div>
             <div id='stopwatchComponent'>StopWatch</div>
         </div>
         <div id='timerComponent' className={ timerComponent === 'true' ? 'colorPalette':  'colorPalette2'} onClick={handelPages} >
-            <div id='timerComponent'><FaStopwatch20 /></div>
+            <div id='timerComponent'><FaStopwatch20 className='clockComponent-icon' /></div>
             <div id='timerComponent'>Timer</div>
         </div>
      </div>

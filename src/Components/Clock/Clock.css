@@ -1,5 +1,6 @@
 .clock-container{
-    margin-top: 8px;
+    margin-top: 25px;
+    /* background-color: red; */
 }
 
 ::-webkit-scrollbar{
@@ -12,18 +13,19 @@
 .clock-container-nav{
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    margin-bottom: 10px;
 }
 .clock-container-nav-edit{
     display: flex;
-    font-size: 14.5px;
+    margin-left: 3px;
+    font-size: 17.5px;
     font-Weight: 400;
     color: #f6b600;
     cursor: pointer;
 }
 .clock-container-contries{
     overflow-y: scroll;
-    height: 525px;
+    height: 740px;
     /* position: absolute; */
     /* border: .3px solid;
     border-top-color: #cccccc7c;
@@ -35,12 +37,13 @@
     display:flex;
     justify-content: flex-start;
     padding: 10px;
-    font-size: 25px;
+    margin-left: -9px;
+    font-size: 30px;
     font-weight: bold;
     color: #fff;
-    border: .3px solid;
+    border: .5px solid;
     border-top-color: transparent;
-    border-bottom-color: #cccccc35;
+    border-bottom-color: #ccccccd0;
     border-right-color: transparent;
     border-left-color: transparent;
 }
@@ -115,14 +118,15 @@ width: 35px;
     color: #cccccc;
     border-radius: 5px;
     height: 320px;
-    width: 325px;
+    width: 365px;
     padding: 0 10px 10px;
     position: absolute;
-    top: 90px;
-    left: 37.4%;
+    top: 95px;
+    left: 5.2%;
     z-index: 100;
     -webkit-filter: drop-shadow(0px 1px 2px rgba(130,130,130,1));
     filter        : drop-shadow(0px 1px 2px rgba(130,130,130,1));  
+    
 }
 .contries-Container::before{
     content: "";
