@@ -24,7 +24,17 @@
     height: 300px;
     border-radius: 50%;
     /* border: 1px solid #fff; */
-    background: rgb(178, 105, 3);
+    background: #b26903;
+    position: relative;
+}
+.Timer-container-CircleOutsite:before{
+    content: '';
+    position: absolute;
+    width: 94%;
+    height: 94%;
+    background: #0c0c0c;
+    border-radius: 50%;
+
 }
 .Timer-container-CircleInside{
     display:flex;
@@ -35,13 +45,15 @@
     width: 285px;
     height: 285px;
     border-radius: 50%;
-    background-color: #0c0c0c;
+    /* background-color: #0c0c0c; */
+     position: relative;
 }
 .Timer-container-CircleInside-time{
    color: #cccccc;
    font-size: 60px;
    font-weight: 200;
    margin-bottom: 10px;
+   /* position: relative; */
 }
 .Timer-container-CircleInside-alarm{
     color: #cccccc67;
