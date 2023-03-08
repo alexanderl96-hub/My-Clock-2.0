@@ -1,5 +1,5 @@
 .stopwatch-container{
-    margin-top: 8px;
+    margin-top: 23px;
     height: 580px;
     padding: 3px;
 }
@@ -10,8 +10,8 @@
     border-radius: 40px; 
 }
 .stopwatch-container-MainWacher{ 
-    height: 350px;
-    border: .3px solid;
+    height: 480px;
+    border: .5px solid;
     border-top-color: transparent;
     border-bottom-color: #cccccc35;
     border-right-color: transparent;
@@ -21,13 +21,17 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    height: 270px;
+    height: 370px;
     
 }
 .stopwatch-container-watcher > div{
-    font-size: 60px;
-     width: 85px;
+    display:flex;
+    justify-content: center;
+    font-size: 80px;
+     width: 90px;
+     margin: 2px;
     font-weight: 200;
+    align-items: center;
 }
 
 .stopwatch-container-second{
@@ -39,11 +43,11 @@
     display:flex; 
     justify-content: center;
     align-items: center;
-    height: 60px;
-    width: 60px;
+    height: 90px;
+    width: 90px;
     background-color: #5151516b;
     border-radius: 50px;
-    font-size: 15px;
+    font-size: 18px;
     border-style: double ;
     border-color:  black;
     cursor:pointer;
@@ -53,11 +57,11 @@
     display:flex; 
     justify-content: center;
     align-items: center;
-    height: 60px;
-    width: 60px;
+    height: 90px;
+    width: 90px;
     background-color: #3434346b;
     border-radius: 50px;
-    font-size: 15px;
+    font-size: 18px;
     border-style: double ;
     border-color:  black;
     cursor:pointer;
@@ -67,12 +71,12 @@
     display:flex; 
     justify-content: center;
     align-items: center;
-    height: 60px;
-    width: 60px;
+    height: 90px;
+    width: 90px;
     color: rgb(3, 147, 3);
     background-color: rgba(9, 49, 11, 0.851);
     border-radius: 50px;
-    font-size: 15px;
+    font-size: 18px;
     border-style: double ;
     border-color:  black;
     cursor:pointer;
@@ -81,27 +85,27 @@
     display:flex; 
     justify-content: center;
     align-items: center;
-    height: 60px;
-    width: 60px;
+    height: 90px;
+    width: 90px;
     color: red;
     background-color: rgba(90, 8, 14, 0.716);
     border-radius: 50px;
-    font-size: 15px;
+    font-size: 18px;
     border-style: double ;
     border-color:  black;
     cursor:pointer;
 }
 .stopwatch-container-lap{
     overflow-y: scroll;
-    height: 200px;
+    height: 300px;
 }
 .stopwatch-container-lap-first{
-    height: 30px;
+    height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    border: .2px solid;
+    border: .5px solid;
     border-top-color: transparent;
     border-bottom-color: #cccccc35;
     border-right-color: transparent;
@@ -109,12 +113,12 @@
 }
 
 .stopwatch-container-lap-first-first{
-    font-size: 14px;
+    font-size: 18px;
     margin-left: 10px;
 }
 .stopwatch-container-lap-first-second{
     display: flex;
     margin-right: 10px ;
-    font-size: 14px;
+    font-size: 18px;
     width: 85px;
 }

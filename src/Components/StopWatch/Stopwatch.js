@@ -122,6 +122,7 @@ const Stopwatch = () => {
          
     //   },[count])
 
+    console.log(storeLap )
 
   function thebestTime (){
     let store = []
@@ -143,7 +144,7 @@ const Stopwatch = () => {
    
   }
 
-console.log(thebestTime())
+
 
     useEffect((e)=>{
         const interval3 = setInterval(()=> {
@@ -156,14 +157,16 @@ console.log(thebestTime())
      
 
     
-    console.log(storeLap )
+    console.log(storeLap[0], storeLap[1], storeLap[2] )
 
   return (
     <div className='stopwatch-container'>
         <div className='stopwatch-container-MainWacher'>
             <div className='stopwatch-container-watcher'>
-               <div className='stopwatch-container-watcher-value'>{minutes ? (minutes < 10 ? '0'.concat(minutes) : minutes) : '00'}:</div>
-               <div>{second ? (second < 10 ? '0'.concat(second) : second) : '00'}.</div>
+               <div className='stopwatch-container-watcher-value'>{minutes ? (minutes < 10 ? '0'.concat(minutes) : minutes) : '00'}</div>
+               <div style={{marginTop: '-15px', width: '10px'}}>:</div>
+               <div>{second ? (second < 10 ? '0'.concat(second) : second) : '00'}</div>
+               <div style={{ width: '2px'}}>.</div>
                <div>{second ? (milliseconds < 10 ? '0'.concat(milliseconds) : milliseconds) : '00'}</div>
             </div>
            <div  className='stopwatch-container-second'>
@@ -189,8 +192,7 @@ console.log(thebestTime())
                      <div className='stopwatch-container-lap-first-second'>
                         <div>{minutes ? (minutes < 10 ? '0'.concat(minutes) : minutes) : '00'}:</div>
                         <div>{second ? (second < 10 ? '0'.concat(second) : second) : '00'}.</div>
-                        {milliseconds < 99 && milliseconds > 10 && <div>{milliseconds ? (milliseconds < 99 ? '0'.concat(milliseconds) : milliseconds ) : '00'}</div>}
-                        {milliseconds < 10  && <div>{milliseconds ? (milliseconds < 10 ? '00'.concat(milliseconds) : milliseconds ) : '00'}</div>}
+                        <div>{milliseconds ? (milliseconds < 10 ? '0'.concat(milliseconds) : milliseconds) : '00'}</div>
                     </div>
                  </div>}
           
@@ -201,68 +203,12 @@ console.log(thebestTime())
                      <div className='stopwatch-container-lap-first-second'>
                         <div>{a[0] ? (a[0]  < 10 ? '0'.concat(a[0] ) : a[0] ) : '00'}:</div>
                         <div>{a[1]  ? (a[1] < 10 ? '0'.concat(a[1]) : a[1]) : '00'}.</div>
-                        {a[2] < 215 && a[2] > 10 && <div>{a[2] ? (a[2] < 100 ? '0'.concat(a[2]) : a[2] ) : '000'}</div>}
-                        {a[2] < 10  && <div>{a[2] ? (a[2] < 10 ? '00'.concat(a[2]) : a[2] ) : '000'}</div>}
+                        <div>{a[2]  ? (a[2] < 10 ? '0'.concat(a[2]) : a[2]) : '00'}</div>
                     </div>
                  </div>
                 )
             })}
-            {/* <div className='stopwatch-container-lap-first'>
-                <div className='stopwatch-container-lap-first-first'>Lap 1</div>
-                <div className='stopwatch-container-lap-first-second'>
-                    <div>00:</div>
-                    <div>02.</div>
-                    <div>000</div>
-                </div>
-            </div>
-            <div className='stopwatch-container-lap-first'>
-                <div className='stopwatch-container-lap-first-first'>Lap 2</div>
-                <div className='stopwatch-container-lap-first-second'>
-                    <div>00:</div>
-                    <div>02.</div>
-                    <div>000</div>
-                </div>
-            </div>
-            <div className='stopwatch-container-lap-first'>
-                <div className='stopwatch-container-lap-first-first'>Lap 3</div>
-                <div className='stopwatch-container-lap-first-second'>
-                    <div>00:</div>
-                    <div>02.</div>
-                    <div>000</div>
-                </div>
-            </div>
-            <div className='stopwatch-container-lap-first'>
-                <div className='stopwatch-container-lap-first-first'>Lap 4</div>
-                <div className='stopwatch-container-lap-first-second'>
-                    <div>00:</div>
-                    <div>02.</div>
-                    <div>000</div>
-                </div>
-            </div>
-            <div className='stopwatch-container-lap-first'>
-                <div className='stopwatch-container-lap-first-first'>Lap 5</div>
-                <div className='stopwatch-container-lap-first-second'>
-                    <div>00:</div>
-                    <div>02.</div>
-                    <div>000</div>
-                </div>
-            </div>
-            <div className='stopwatch-container-lap-first'>
-                <div className='stopwatch-container-lap-first-first'>Lap 6</div>
-                <div className='stopwatch-container-lap-first-second'>
-                    <div>00:</div>
-                    <div>02.</div>
-                    <div>000</div>
-                </div>
-            </div>
-            <div className='stopwatch-container-lap-first'>
-                <div className='stopwatch-container-lap-first-first'>Lap 7</div>
-                <div className='stopwatch-container-lap-first-second'>
-                    <div>00:</div>
-                    <div>02.</div>
-                    <div>000</div>
-                </div>
-            </div> */}
+           
         </div>
         <div></div>
     </div>

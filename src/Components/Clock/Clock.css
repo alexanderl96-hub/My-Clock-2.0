@@ -1,5 +1,5 @@
 .clock-container{
-    margin-top: 25px;
+    margin-top: 23px;
     /* background-color: red; */
 }
 
@@ -25,7 +25,7 @@
 }
 .clock-container-contries{
     overflow-y: scroll;
-    height: 740px;
+    height: 730px;
     /* position: absolute; */
     /* border: .3px solid;
     border-top-color: #cccccc7c;
@@ -51,7 +51,7 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    border: .3px solid;
+    border: .2px solid;
     border-top-color: transparent;
     border-bottom-color: #cccccc35;
     border-right-color: transparent;
@@ -64,31 +64,35 @@
 .clock-container-card-first-Day{
     text-align: start;
     color: #cccccc90;
-    font-size: 14px;
+    font-size: 17px;
     margin-left: 11px;
 }
 .clock-container-card-first-Place{
     text-align: start;
-    font-size: 19px;
-    font-weight: 500;
+    font-size: 23px;
+    font-weight: 300;
     margin-left: 12px;
+    color: white;
 }
 .clock-container-card-second{
     display: flex;
     margin-right: 15px;
 }
 .clock-container-card-second-Time{
-font-size: 40px;
-font-weight: 400;
-letter-spacing: 1px;
-width: 110px;
+    font-size: 45px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    width: 115px;
+    color: white;
 }
 
 .clock-container-card-second-Format{
-    margin-top: 25px;
+    margin-top: 28px;
     margin-left: 5px;
-    font-size: 15.5px;
+    font-size: 17px;
     letter-spacing: .5px;
+    color: white;
+    font-weight: 300;
 }
 
 .contries-Container-contries {
