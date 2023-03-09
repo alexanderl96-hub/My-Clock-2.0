@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import './Timer.css'
-
+const hours = [68,68,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,68, 68]
+const min = [ 68,68,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59, 68,68,]
+const sec = [68,68,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59, 68,68,]
 
 
 const Timer = () => {
@@ -9,6 +11,7 @@ const Timer = () => {
   const [activePause, setActivePause] = useState('false')
   const [progressBar, setProgressBar] = useState(100)
   const [progressTime, setProgressTime] = useState(0)
+  const [value, setValue] = useState('')
  
 
  useEffect(()=>{
@@ -37,21 +40,56 @@ const Timer = () => {
    setActiveStart('true')
   }
 
+  function handelValue(e){
+   setValue(e.target.id )
+
+  }
+console.log(value)
   return (
     <div className='timer-container'>
        <div className='Timer-container-Main'>
-          <div  className='Timer-container-watcher'>
+          {/* <div  className='Timer-container-watcher'>
              <div className='Timer-container-CircleOutsite' 
              style={{background : `conic-gradient(#b26903 ${progressBar * 3.6}deg, #434342 ${progressBar * 3.6}deg)`,}}>
-
-                   {/* <div className='Timer-container-CircleInside-time'>06:14</div>
-                  <div className='Timer-container-CircleInside-alarm'>🔔 2:18 AM</div> */}
                 <div className='Timer-container-CircleInside'>
                   <div className='Timer-container-CircleInside-time'>06:14</div>
                   <div className='Timer-container-CircleInside-alarm'>🔔 2:18 AM</div>
                 </div>
              </div>
-
+          </div> */}
+          <div className='Timer-container-watcher-Input'>
+              <div className='Timer-container-watcher-Input-in'>
+                  <div className='Timer-container-watcher-Input-divHolder'>
+                     <div className='timer-map-hours' >{hours.map((a)=>{
+                        return(
+                           <div style={{margin: '8px'}} onMouseOver={handelValue}>
+                           { a > 23 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
+                           <div id={a} style={{fontSize: '25px',}}>{a > 23 ? null : a}</div>
+                           </div>
+                        )
+                     })}</div>
+                  </div> <div style={{fontSize: '25px', marginLeft: '-25px'}}>hours</div>
+                  <div className='Timer-container-watcher-Input-divHolder'>
+                     <div className='timer-map-hours' >{min.map((a)=>{
+                           return(
+                              <div style={{margin: '8px'}} onMouseOver={handelValue}>
+                              { a > 60 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
+                              <div id={a} style={{fontSize: '25px',}}>{a > 60 ? null : a}</div>
+                              </div>
+                           )
+                        })}</div>
+                  </div><div style={{fontSize: '25px', marginLeft: '-25px'}}>min</div>
+                  <div className='Timer-container-watcher-Input-divHolder'>
+                  <div className='timer-map-hours' >{sec.map((a)=>{
+                           return(
+                              <div style={{margin: '8px'}} onMouseOver={handelValue}>
+                              { a > 60 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
+                              <div id={a} style={{fontSize: '25px',}}>{a > 60 ? null : a}</div>
+                              </div>
+                           )
+                        })}</div>
+                  </div><div style={{fontSize: '25px', marginLeft: '-25px'}}>sec</div>
+            </div>
           </div>
 
           <div  className='Timer-container-Buttons'>
