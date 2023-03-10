@@ -12,26 +12,48 @@ const Timer = () => {
   const [progressBar, setProgressBar] = useState(100)
   const [progressTime, setProgressTime] = useState(0)
   const [value, setValue] = useState('')
+  const [timeHour, setTimeHour] = useState(0)
+  const [timeMin, setTimeMin] = useState(0)
+  const [timeSec, setTimeSec] = useState(0)
+  const [minimun, setMinumun] = useState([])
+  
  
 
+
+
+
  useEffect(()=>{
+
    const interval = setInterval(()=> {
       if(progressBar > progressTime && activeStart === 'true' && activeResume  === 'false'){
          setProgressBar(progressBar-1) 
+         handelMillisecond()
+      }else if(progressBar === progressTime && timeHour === 0 && timeMin == 0 && timeSec == 0){
+           setActiveStart('false')
+             setActiveResume('false')
+             setActivePause('false')
+             setProgressBar(100)
+             setProgressTime(0)
+            setTimeHour(0)
+            setTimeMin(0)
+            setTimeSec(0)
       }else{
          setActivePause('true')
-         clearInterval(interval);
+         clearInterval(interval); 
       }
-     ;}, 20);
+     ;}, 1000);
      return ()=> clearInterval(interval);
      
       
- },[progressBar, progressTime, activeStart, activeResume])
+ },[progressBar, progressTime, activeStart, activeResume, ])
   function handelReset () {
     setActiveResume('false')
     setActiveStart('false')
     setProgressBar(100)
     setProgressTime(0)
+    setTimeHour(0)
+    setTimeMin(0)
+    setTimeSec(0)
   }
  
   function handelPause (){
@@ -41,22 +63,48 @@ const Timer = () => {
   }
 
   function handelValue(e){
-   setValue(e.target.id )
+   setTimeHour(   Number(e.target.id ))
+  }
+    function handelMinute(e){
+    setTimeMin( Number(e.target.id ))
 
   }
-console.log(value)
+    function handelSecond(e){
+   setTimeSec( Number(e.target.id ))
+  }
+ 
+  function handelMillisecond (e){
+   if(activeStart === 'true'){
+       if( timeSec  === 0){
+         setTimeSec(59 -1)
+         setTimeMin(timeMin - 1)
+       }else if(timeMin === 0 && timeHour === 0){
+         setTimeMin(0)
+         // setTimeHour(timeHour -1)
+         setTimeSec(timeSec -1)
+       }else if(timeHour === 0 ){
+         setTimeHour(0)
+         setTimeSec(timeSec -1)
+       }else{
+         setTimeSec(timeSec -1)
+       
+       }
+
+   }
+  }
   return (
     <div className='timer-container'>
        <div className='Timer-container-Main'>
-          {/* <div  className='Timer-container-watcher'>
+          {activeStart === 'true' && <div  className='Timer-container-watcher'>
              <div className='Timer-container-CircleOutsite' 
              style={{background : `conic-gradient(#b26903 ${progressBar * 3.6}deg, #434342 ${progressBar * 3.6}deg)`,}}>
                 <div className='Timer-container-CircleInside'>
-                  <div className='Timer-container-CircleInside-time'>06:14</div>
+                  <div className='Timer-container-CircleInside-time'>{timeHour}:{timeMin < 10 ? '0'.concat(timeMin): timeMin}{ timeSec ?  `:${timeSec < 10 ? '0'.concat(timeSec): timeSec}`: null}</div>
                   <div className='Timer-container-CircleInside-alarm'>🔔 2:18 AM</div>
                 </div>
              </div>
-          </div> */}
+          </div>}
+           {activeStart === 'false' &&
           <div className='Timer-container-watcher-Input'>
               <div className='Timer-container-watcher-Input-in'>
                   <div className='Timer-container-watcher-Input-divHolder'>
@@ -72,7 +120,7 @@ console.log(value)
                   <div className='Timer-container-watcher-Input-divHolder'>
                      <div className='timer-map-hours' >{min.map((a)=>{
                            return(
-                              <div style={{margin: '8px'}} onMouseOver={handelValue}>
+                              <div style={{margin: '8px'}} onMouseOver={handelMinute}>
                               { a > 60 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
                               <div id={a} style={{fontSize: '25px',}}>{a > 60 ? null : a}</div>
                               </div>
@@ -82,7 +130,7 @@ console.log(value)
                   <div className='Timer-container-watcher-Input-divHolder'>
                   <div className='timer-map-hours' >{sec.map((a)=>{
                            return(
-                              <div style={{margin: '8px'}} onMouseOver={handelValue}>
+                              <div style={{margin: '8px'}} onMouseOver={handelSecond}>
                               { a > 60 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
                               <div id={a} style={{fontSize: '25px',}}>{a > 60 ? null : a}</div>
                               </div>
@@ -90,7 +138,7 @@ console.log(value)
                         })}</div>
                   </div><div style={{fontSize: '25px', marginLeft: '-25px'}}>sec</div>
             </div>
-          </div>
+          </div>}
 
           <div  className='Timer-container-Buttons'>
               {/* <div 
@@ -99,8 +147,8 @@ console.log(value)
                   onClick={handelReset}
                    className='Timer-container-Button-Cancel2'>Cancel</div>
 
-              {/* <div className='Timer-container-Button-Start'>Start</div> */}
-            {activeStart === 'false' && progressBar === 100  && <div onClick={(()=> setActiveStart('true'))}
+             {activeStart === 'false' && timeHour === 0 && timeMin === 0 && timeSec === 0 &&  <div className='Timer-container-Button-Start'>Start</div>}
+            {activeStart === 'false' && (timeHour > 0 || timeMin > 0 || timeSec > 0) && <div onClick={(()=> setActiveStart('true'))}
                    className='Timer-container-Button-Start2' 
                    >Start</div>}
 
