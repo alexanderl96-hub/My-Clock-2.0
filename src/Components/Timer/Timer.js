@@ -6,10 +6,12 @@ const sec = [68,68,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
 
 
 const Timer = () => {
+ 
+
   const [activeStart, setActiveStart] = useState('false')
   const [activeResume, setActiveResume] = useState('false')
   const [activePause, setActivePause] = useState('false')
-  const [progressBar, setProgressBar] = useState(100)
+  const [progressBar, setProgressBar] = useState(0)
   const [progressTime, setProgressTime] = useState(0)
   const [value, setValue] = useState('')
   const [timeHour, setTimeHour] = useState(0)
@@ -18,21 +20,28 @@ const Timer = () => {
   const [minimun, setMinumun] = useState([])
   
  
-
-
-
+ 
+  const one = timeSec * 1000
+  const two = one * 60
+  const three = two * 24
+  const tikme = one + two + three
+ 
 
  useEffect(()=>{
+   
+  
 
    const interval = setInterval(()=> {
+     
       if(progressBar > progressTime && activeStart === 'true' && activeResume  === 'false'){
-         setProgressBar(progressBar-1) 
+        
+         setProgressBar(progressBar - 1) 
          handelMillisecond()
-      }else if(progressBar === progressTime && timeHour === 0 && timeMin == 0 && timeSec == 0){
+      }else if(progressBar === progressTime && timeHour === 0 && timeMin === 0 && timeSec === 0){
            setActiveStart('false')
              setActiveResume('false')
              setActivePause('false')
-             setProgressBar(100)
+             setProgressBar(0)
              setProgressTime(0)
             setTimeHour(0)
             setTimeMin(0)
@@ -43,9 +52,9 @@ const Timer = () => {
       }
      ;}, 1000);
      return ()=> clearInterval(interval);
-     
+    
       
- },[progressBar, progressTime, activeStart, activeResume, ])
+ },[progressBar, progressTime, activeStart, activeResume,])
   function handelReset () {
     setActiveResume('false')
     setActiveStart('false')
@@ -55,7 +64,7 @@ const Timer = () => {
     setTimeMin(0)
     setTimeSec(0)
   }
- 
+ console.log(progressBar, 'htfjhfgkjgkg')
   function handelPause (){
    // setActivePause('true')
    setActiveResume('true')
@@ -64,19 +73,22 @@ const Timer = () => {
 
   function handelValue(e){
    setTimeHour(   Number(e.target.id ))
+    setProgressBar(progressBar + Number(e.target.id ))
   }
     function handelMinute(e){
     setTimeMin( Number(e.target.id ))
+     setProgressBar(progressBar + Number(e.target.id ))
 
   }
     function handelSecond(e){
    setTimeSec( Number(e.target.id ))
+    setProgressBar(progressBar + Number(e.target.id ))
   }
- 
+
   function handelMillisecond (e){
    if(activeStart === 'true'){
        if( timeSec  === 0){
-         setTimeSec(59 -1)
+         setTimeSec(60 -1)
          setTimeMin(timeMin - 1)
        }else if(timeMin === 0 && timeHour === 0){
          setTimeMin(0)
@@ -92,6 +104,7 @@ const Timer = () => {
 
    }
   }
+// console.log((one +  two + three)-6000) 
   return (
     <div className='timer-container'>
        <div className='Timer-container-Main'>
@@ -99,7 +112,7 @@ const Timer = () => {
              <div className='Timer-container-CircleOutsite' 
              style={{background : `conic-gradient(#b26903 ${progressBar * 3.6}deg, #434342 ${progressBar * 3.6}deg)`,}}>
                 <div className='Timer-container-CircleInside'>
-                  <div className='Timer-container-CircleInside-time'>{timeHour}:{timeMin < 10 ? '0'.concat(timeMin): timeMin}{ timeSec ?  `:${timeSec < 10 ? '0'.concat(timeSec): timeSec}`: null}</div>
+                  <div className='Timer-container-CircleInside-time'>{timeHour}:{timeMin < 10 ? '0'.concat(timeMin): timeMin}{ timeSec ?  `:${timeSec < 10 ? '0'.concat(timeSec): timeSec}`: ':00'}</div>
                   <div className='Timer-container-CircleInside-alarm'>🔔 2:18 AM</div>
                 </div>
              </div>
