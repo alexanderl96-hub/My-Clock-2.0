@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import './Timer.css'
-const hours = [68,68,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,68, 68]
-const min = [ 68,68,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59, 68,68,]
-const sec = [68,68,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59, 68,68,]
+const hours = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,]
+const min = [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
+const sec = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
 
 
 const Timer = () => {
@@ -20,18 +20,25 @@ const Timer = () => {
   const [minimun, setMinumun] = useState([])
   
  
- 
-  const one = timeSec * 1000
-  const two = one * 60
-  const three = two * 24
-  const tikme = one + two + three
+  function handelValue(e){
+    setTimeHour(   Number(e.target.value ))
+    setProgressBar(progressBar + (Number(e.target.value) > 0 ? Number(e.target.value ) * (60*60) : 0))
+  }
+    function handelMinute(e){
+     setTimeMin( Number(e.target.value ) )
+     setProgressBar(progressBar +(Number(e.target.value ) > 0 ? Number(e.target.value ) * 60 : 0))
+
+  }
+    function handelSecond(e){
+     setTimeSec( Number(e.target.value ))
+     setProgressBar( progressBar + (Number(e.target.value ) > 0 ? Number(e.target.value ) : 0))
+  }
  
 
  useEffect(()=>{
    
-  
-
    const interval = setInterval(()=> {
+     
      
       if(progressBar > progressTime && activeStart === 'true' && activeResume  === 'false'){
         
@@ -58,59 +65,44 @@ const Timer = () => {
   function handelReset () {
     setActiveResume('false')
     setActiveStart('false')
-    setProgressBar(100)
+    setProgressBar(0)
     setProgressTime(0)
     setTimeHour(0)
     setTimeMin(0)
     setTimeSec(0)
   }
- console.log(progressBar, 'htfjhfgkjgkg')
+
   function handelPause (){
    // setActivePause('true')
    setActiveResume('true')
    setActiveStart('true')
   }
 
-  function handelValue(e){
-   setTimeHour(   Number(e.target.id ))
-    setProgressBar(progressBar + Number(e.target.id ))
-  }
-    function handelMinute(e){
-    setTimeMin( Number(e.target.id ))
-     setProgressBar(progressBar + Number(e.target.id ))
-
-  }
-    function handelSecond(e){
-   setTimeSec( Number(e.target.id ))
-    setProgressBar(progressBar + Number(e.target.id ))
-  }
 
   function handelMillisecond (e){
+  
    if(activeStart === 'true'){
-       if( timeSec  === 0){
-         setTimeSec(60 -1)
-         setTimeMin(timeMin - 1)
-       }else if(timeMin === 0 && timeHour === 0){
-         setTimeMin(0)
-         // setTimeHour(timeHour -1)
-         setTimeSec(timeSec -1)
-       }else if(timeHour === 0 ){
-         setTimeHour(0)
-         setTimeSec(timeSec -1)
+       if( timeSec  === 0 &&  timeMin > 0){
+         setTimeSec(60 - 1)
+        setTimeMin(timeMin - 1)
+       }else if(timeMin === 0 && timeHour > 0){
+         setTimeHour(timeHour - 1)
+         setTimeMin(60) 
        }else{
          setTimeSec(timeSec -1)
-       
        }
 
    }
   }
-// console.log((one +  two + three)-6000) 
+  console.log(progressBar, 'htfjhfgkjgkg')
+
   return (
     <div className='timer-container'>
        <div className='Timer-container-Main'>
           {activeStart === 'true' && <div  className='Timer-container-watcher'>
              <div className='Timer-container-CircleOutsite' 
-             style={{background : `conic-gradient(#b26903 ${progressBar * 3.6}deg, #434342 ${progressBar * 3.6}deg)`,}}>
+             style={{background : `conic-gradient(#b26903 ${progressBar * 0.50}deg, #434342 ${progressBar * 0.50}deg)`,
+              transitionDuration: '5s 1s', transitionProperty: 'background-color'}}>
                 <div className='Timer-container-CircleInside'>
                   <div className='Timer-container-CircleInside-time'>{timeHour}:{timeMin < 10 ? '0'.concat(timeMin): timeMin}{ timeSec ?  `:${timeSec < 10 ? '0'.concat(timeSec): timeSec}`: ':00'}</div>
                   <div className='Timer-container-CircleInside-alarm'>🔔 2:18 AM</div>
@@ -121,34 +113,40 @@ const Timer = () => {
           <div className='Timer-container-watcher-Input'>
               <div className='Timer-container-watcher-Input-in'>
                   <div className='Timer-container-watcher-Input-divHolder'>
-                     <div className='timer-map-hours' >{hours.map((a)=>{
+                     <select className='timer-map-hours' onChange={handelValue} >{hours.map((a)=>{
                         return(
-                           <div style={{margin: '8px'}} onMouseOver={handelValue}>
-                           { a > 23 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
-                           <div id={a} style={{fontSize: '25px',}}>{a > 23 ? null : a}</div>
-                           </div>
+                           <>
+                           {/* // < div style={{margin: '8px'}} onMouseOver={handelValue}> */}
+                           {/* { a > 23 &&  <option value={a}  onClick={handelValue}  style={{fontSize: '25px',color: 'transparent'}}>{a}</option>   } */}
+                           <option value={a}   style={{fontSize: '25px',}}>{a}</option>
+                           {/* // </div> */}
+                           </>
                         )
-                     })}</div>
+                     })}</select>
                   </div> <div style={{fontSize: '25px', marginLeft: '-25px'}}>hours</div>
                   <div className='Timer-container-watcher-Input-divHolder'>
-                     <div className='timer-map-hours' >{min.map((a)=>{
+                     <select  className='timer-map-hours' onChange={handelMinute} >{min.map((a)=>{
                            return(
-                              <div style={{margin: '8px'}} onMouseOver={handelMinute}>
-                              { a > 60 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
-                              <div id={a} style={{fontSize: '25px',}}>{a > 60 ? null : a}</div>
-                              </div>
+                              <>
+                              {/* // <div style={{margin: '8px'}} onMouseOver={handelMinute}> */}
+                              {/* { a > 60 &&  <option value={a}  onChange={handelMinute} style={{fontSize: '25px',color: 'transparent'}}>{a}</option>   } */}
+                              <option value={a}   style={{fontSize: '25px',}}>{ a}</option>
+                              {/* // </div> */}
+                              </>
                            )
-                        })}</div>
+                        })}</select >
                   </div><div style={{fontSize: '25px', marginLeft: '-25px'}}>min</div>
                   <div className='Timer-container-watcher-Input-divHolder'>
-                  <div className='timer-map-hours' >{sec.map((a)=>{
+                  <select  className='timer-map-hours'  onChange={handelSecond} >{sec.map((a)=>{
                            return(
-                              <div style={{margin: '8px'}} onMouseOver={handelSecond}>
-                              { a > 60 &&  <div id={a}  style={{fontSize: '25px',color: 'transparent'}}>{a}</div>   }
-                              <div id={a} style={{fontSize: '25px',}}>{a > 60 ? null : a}</div>
-                              </div>
+                              <>
+                              {/* <div style={{margin: '8px'}} onMouseOver={handelSecond}> */}
+                              {/* { a > 60 &&  <option value={a}   onChange={handelSecond}  style={{fontSize: '25px',color: 'transparent'}}>{a}</option>   } */}
+                              <option value={a}  style={{fontSize: '25px',}}>{ a}</option>
+                              {/* </div> */}
+                               </>
                            )
-                        })}</div>
+                        })}</select >
                   </div><div style={{fontSize: '25px', marginLeft: '-25px'}}>sec</div>
             </div>
           </div>}
