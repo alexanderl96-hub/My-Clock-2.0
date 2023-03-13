@@ -101,8 +101,8 @@ const Timer = () => {
        <div className='Timer-container-Main'>
           {activeStart === 'true' && <div  className='Timer-container-watcher'>
              <div className='Timer-container-CircleOutsite' 
-             style={{background : `conic-gradient(#b26903 ${progressBar * 0.50}deg, #434342 ${progressBar * 0.50}deg)`,
-              transitionDuration: '5s 1s', transitionProperty: 'background-color'}}>
+             style={{background : `conic-gradient(#b26903 ${ progressBar * 0.1}deg, #434342 ${ progressBar * 0.1}deg)`,
+              transitionDuration: '5s',}}>
                 <div className='Timer-container-CircleInside'>
                   <div className='Timer-container-CircleInside-time'>{timeHour}:{timeMin < 10 ? '0'.concat(timeMin): timeMin}{ timeSec ?  `:${timeSec < 10 ? '0'.concat(timeSec): timeSec}`: ':00'}</div>
                   <div className='Timer-container-CircleInside-alarm'>🔔 2:18 AM</div>

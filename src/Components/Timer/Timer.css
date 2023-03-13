@@ -54,7 +54,7 @@
     /* border: 1px solid #fff; */
     background: #b26903;
     position: relative;
-    transition-duration: all 5s ease-in-out;
+    /* transition-duration:  5s ; */
 }
 .Timer-container-CircleOutsite:before{
     content: '';
@@ -63,7 +63,7 @@
     height: 94%;
     background: #0c0c0c;
     border-radius: 50%;
-    transition-duration: all 5s ease-in-out;
+    /* transition-duration:  5s ; */
 
 }
 .Timer-container-CircleInside{
