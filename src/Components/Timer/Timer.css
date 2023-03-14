@@ -20,17 +20,19 @@
 }
 .Timer-container-watcher-Input-divHolder{
     display:flex;
-    /* gap: 5px; */
 }
 .Timer-container-watcher-Input-divHolder > div{
     font-size: larger;
+
 } 
 .timer-map-hours{
-    height: 195px;
-    background: tranparent;
+    height: 50px;
+    background: transparent;
     overflow-y: scroll;
     align-items: center;
-    border-radius: 50px;
+    color: white;
+    border: none;
+    font-size: 24px;
 }
 
 .timer-map-hours::-webkit-scrollbar-thumb{
@@ -83,8 +85,12 @@
    font-size: 60px;
    font-weight: 200;
    margin-bottom: 10px;
-   /* position: relative; */
+   display: flex;
 }
+.Timer-container-CircleInside-time > div{
+    width: 70px;
+}
+
 .Timer-container-CircleInside-alarm{
     color: #cccccc67;
     font-size: 18px;
