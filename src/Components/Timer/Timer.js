@@ -11,29 +11,30 @@ const Timer = () => {
   const [activeStart, setActiveStart] = useState('false')
   const [activeResume, setActiveResume] = useState('false')
   const [activePause, setActivePause] = useState('false')
-  const [progressBar, setProgressBar] = useState(0)
+  const [progressBar, setProgressBar] = useState(100)
   const [progressTime, setProgressTime] = useState(0)
   const [value, setValue] = useState('')
   const [timeHour, setTimeHour] = useState(0)
   const [timeMin, setTimeMin] = useState(0)
   const [timeSec, setTimeSec] = useState(0)
-  const [minimun, setMinumun] = useState([])
+  const [minimun, setMinumun] = useState(0)
   
  
   function handelValue(e){
     setTimeHour(   Number(e.target.value ))
-    setProgressBar(progressBar + (Number(e.target.value) > 0 ? Number(e.target.value ) * (60*60) : 0))
+    setMinumun(minimun + (Number(e.target.value) > 0 ? Number(e.target.value ) * (60*60) : 0))
   }
     function handelMinute(e){
      setTimeMin( Number(e.target.value ) )
-     setProgressBar(progressBar +(Number(e.target.value ) > 0 ? Number(e.target.value ) * 60 : 0))
+     setMinumun(minimun +(Number(e.target.value ) > 0 ? Number(e.target.value ) * 60 : 0))
 
   }
     function handelSecond(e){
      setTimeSec( Number(e.target.value ))
-     setProgressBar( progressBar + (Number(e.target.value ) > 0 ? Number(e.target.value ) : 0))
+     setMinumun( minimun + (Number(e.target.value ) > 0 ? Number(e.target.value ) : 0))
   }
- 
+ console.log(100/minimun, 'rest')
+ const restingProgressBar = Math.abs(100 / minimun)
 
  useEffect(()=>{
    
@@ -41,18 +42,20 @@ const Timer = () => {
      
      
       if(progressBar > progressTime && activeStart === 'true' && activeResume  === 'false'){
-        
-         setProgressBar(progressBar - 1) 
+        console.log(progressBar, 'check progressBar')
+         setProgressBar(progressBar - restingProgressBar) 
          handelMillisecond()
-      }else if(progressBar === progressTime && timeHour === 0 && timeMin === 0 && timeSec === 0){
+      }else if(progressBar <= progressTime && timeHour === 0 && timeMin === 0 && timeSec <= 0){
            setActiveStart('false')
              setActiveResume('false')
              setActivePause('false')
-             setProgressBar(0)
+             setProgressBar(100)
              setProgressTime(0)
             setTimeHour(0)
             setTimeMin(0)
             setTimeSec(0)
+            setMinumun(0)
+            
       }else{
          setActivePause('true')
          clearInterval(interval); 
@@ -61,7 +64,7 @@ const Timer = () => {
      return ()=> clearInterval(interval);
     
       
- },[progressBar, progressTime, activeStart, activeResume,])
+ },[progressBar, progressTime, activeStart, activeResume ])
   function handelReset () {
     setActiveResume('false')
     setActiveStart('false')
@@ -79,8 +82,7 @@ const Timer = () => {
   }
 
 
-  function handelMillisecond (e){
-  
+  function handelMillisecond (){
    if(activeStart === 'true'){
        if( timeSec  === 0 &&  timeMin > 0){
          setTimeSec(60 - 1)
@@ -94,14 +96,14 @@ const Timer = () => {
 
    }
   }
-  console.log(progressBar, 'htfjhfgkjgkg')
+  console.log(Math.ceil(progressBar), 'htfjhfgkjgkg')
 
   return (
     <div className='timer-container'>
        <div className='Timer-container-Main'>
           {activeStart === 'true' && <div  className='Timer-container-watcher'>
              <div className='Timer-container-CircleOutsite' 
-             style={{background : `conic-gradient(#b26903 ${ progressBar * 0.1}deg, #434342 ${ progressBar * 0.1}deg)`,
+             style={{background : `conic-gradient(#b26903 ${ progressBar * 3.5 }deg, #434342 ${ progressBar * 3.5}deg)`,
               transitionDuration: '5s',}}>
                 <div className='Timer-container-CircleInside'>
                   <div className='Timer-container-CircleInside-time'>
