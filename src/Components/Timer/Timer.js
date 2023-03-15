@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './Timer.css'
+import {  FaStopwatch20 } from 'react-icons/fa';
 const hours = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,]
 const min = [ 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
 const sec = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59]
@@ -10,45 +11,44 @@ const Timer = () => {
 
   const [activeStart, setActiveStart] = useState('false')
   const [activeResume, setActiveResume] = useState('false')
-  const [activePause, setActivePause] = useState('false')
+  const [activeAlarm, setActiveAlarm] = useState('false')
   const [progressBar, setProgressBar] = useState(100)
   const [progressTime, setProgressTime] = useState(0)
   const [value, setValue] = useState('')
   const [timeHour, setTimeHour] = useState(0)
   const [timeMin, setTimeMin] = useState(0)
   const [timeSec, setTimeSec] = useState(0)
+  const [milisec, setMiliSec] = useState(100)
   const [minimun, setMinumun] = useState(0)
   
  
   function handelValue(e){
     setTimeHour(   Number(e.target.value ))
-    setMinumun(minimun + (Number(e.target.value) > 0 ? Number(e.target.value ) * (60*60) : 0))
+    setMinumun(minimun + (Number(e.target.value) > 0 ? Number(e.target.value ) * (864000) : 0))
   }
     function handelMinute(e){
      setTimeMin( Number(e.target.value ) )
-     setMinumun(minimun +(Number(e.target.value ) > 0 ? Number(e.target.value ) * 60 : 0))
+     setMinumun(minimun +(Number(e.target.value ) > 0 ? Number(e.target.value ) * (3600+2330) : 0))
 
   }
     function handelSecond(e){
      setTimeSec( Number(e.target.value ))
-     setMinumun( minimun + (Number(e.target.value ) > 0 ? Number(e.target.value ) : 0))
+      setMinumun( minimun + (Number(e.target.value ) > 0 ? Number(e.target.value ) * (100) : 0))
   }
- console.log(100/minimun, 'rest')
+ console.log(minimun, 100/minimun, 'rest')
  const restingProgressBar = Math.abs(100 / minimun)
+
 
  useEffect(()=>{
    
    const interval = setInterval(()=> {
-     
-     
       if(progressBar > progressTime && activeStart === 'true' && activeResume  === 'false'){
-        console.log(progressBar, 'check progressBar')
          setProgressBar(progressBar - restingProgressBar) 
          handelMillisecond()
       }else if(progressBar <= progressTime && timeHour === 0 && timeMin === 0 && timeSec <= 0){
            setActiveStart('false')
              setActiveResume('false')
-             setActivePause('false')
+             setActiveAlarm('true')
              setProgressBar(100)
              setProgressTime(0)
             setTimeHour(0)
@@ -57,22 +57,24 @@ const Timer = () => {
             setMinumun(0)
             
       }else{
-         setActivePause('true')
+         // setActivePause('true')
          clearInterval(interval); 
       }
-     ;}, 1000);
+     ;}, 1);
      return ()=> clearInterval(interval);
     
       
- },[progressBar, progressTime, activeStart, activeResume ])
+ },[progressBar, progressTime, activeStart, activeResume, restingProgressBar, timeHour, timeMin, timeSec ])
+
   function handelReset () {
     setActiveResume('false')
     setActiveStart('false')
-    setProgressBar(0)
+    setProgressBar(100)
     setProgressTime(0)
     setTimeHour(0)
     setTimeMin(0)
     setTimeSec(0)
+    setMinumun(0)
   }
 
   function handelPause (){
@@ -84,14 +86,17 @@ const Timer = () => {
 
   function handelMillisecond (){
    if(activeStart === 'true'){
-       if( timeSec  === 0 &&  timeMin > 0){
+      if(milisec === 0){
+         setMiliSec(100 - 1)
+         setTimeSec(timeSec -1)
+      }else if( timeSec  === 0 &&  timeMin > 0){
          setTimeSec(60 - 1)
         setTimeMin(timeMin - 1)
        }else if(timeMin === 0 && timeHour > 0){
          setTimeHour(timeHour - 1)
          setTimeMin(60) 
        }else{
-         setTimeSec(timeSec -1)
+         setMiliSec(milisec - 1)
        }
 
    }
@@ -100,11 +105,20 @@ const Timer = () => {
 
   return (
     <div className='timer-container'>
+       {activeAlarm === 'true' && <div style={{backgroundColor: '#757474', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                      padding: '7px', borderRadius: '30px', position: 'absolute', top: '6%', float: 'left', zIndex: 100, width: '355px'}} onClick={()=> setActiveAlarm('false')}>
+            <div style={{display: 'flex',  marginLeft: '8px'}}>
+               <div><FaStopwatch20 style={{fontSize: '30px'}}/></div>
+               <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',
+               width: '50px', fontSize: '13px', color: '#1b1a1ad0', flexWrap: 'wrap'}}><div style={{fontWeight: 400, color: 'black'}}>Clock </div> <div>Timer</div></div>
+            </div>
+            <div style={{fontSize: '10px', marginTop: '-20px', color: '#1b1a1ad0', marginRight: '8px'}}>now</div>
+          </div>}
        <div className='Timer-container-Main'>
           {activeStart === 'true' && <div  className='Timer-container-watcher'>
              <div className='Timer-container-CircleOutsite' 
              style={{background : `conic-gradient(#b26903 ${ progressBar * 3.5 }deg, #434342 ${ progressBar * 3.5}deg)`,
-              transitionDuration: '5s',}}>
+              }}>
                 <div className='Timer-container-CircleInside'>
                   <div className='Timer-container-CircleInside-time'>
                         {timeMin === 60 && <div style={{display: 'flex', justifyContent: 'flex-end', width: '40px'}}>{timeHour + 1}</div>}
@@ -185,6 +199,8 @@ const Timer = () => {
              <div className='Timer-container-alarm-first'>When Timer Ends</div>
              <div className='Timer-container-alarm-second'>Radar <p>⌵</p></div>
           </div>
+
+       
 
        </div>
 

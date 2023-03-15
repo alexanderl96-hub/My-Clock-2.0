@@ -44,6 +44,7 @@
     align-items: center;
     text-align: center;
     height: 400px;
+   
 }
 .Timer-container-CircleOutsite{
     display:flex;
@@ -53,10 +54,8 @@
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    /* border: 1px solid #fff; */
     background: #b26903;
     position: relative;
-    /* transition-duration:  5s ; */
 }
 .Timer-container-CircleOutsite:before{
     content: '';
@@ -216,7 +215,7 @@
     display: flex;
     align-items: center;
     letter-spacing: 1px;
-    color: rgba(138, 137, 137, 0.814);
+    color: #8a8989d0;
 }
 .Timer-container-alarm-second > p{
     font-size: 22px;
