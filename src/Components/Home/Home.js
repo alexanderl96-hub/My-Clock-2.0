@@ -15,7 +15,7 @@ const Home = () => {
     const [currentTime, setCurrentTime] = useState(0)
     const [currentMin, setCurrentMin] = useState(0)
     const [count, setCount] = useState(0)
-    
+    const memberImg2 = 'https://cdn3.iconfinder.com/data/icons/modern-future-technology/128/mobile-phone-x-512.png'
 
   function handelPages (e){
     console.log(e.target.id)
@@ -50,13 +50,18 @@ const Home = () => {
 
 
   return (
-    <div className="container" >
+    <div className="container" style={{backgroundImage: `url(${memberImg2})`,  backgroundPosition: 'center',
+    backgroundSize: '200% 100%',
+    backgroundRepeat: 'no-repeat'}}  >
      <div className='container-time'>
-        <div className='container-time-current'>{currentTime < 10 ? '0'.concat(currentTime): currentTime}:
+        <div className='container-time-current' >{currentTime < 10 ? '0'.concat(currentTime): currentTime}:
         {currentMin}</div>
+        {/* <div style={{width: '240px', height: '30px', marginLeft: '5px', 
+         borderBottomLeftRadius: '15px',  borderBottomRightRadius: '15px',
+          backgroundColor: '#070707'}}></div> */}
         <div className='container-time-inside'>
-            <div> <FaWifi /></div>
-            <div><FaBatteryFull /></div>
+            <div > <FaWifi /></div>
+            <div  ><FaBatteryFull /></div>
         </div>
      </div> 
 

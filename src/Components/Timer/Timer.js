@@ -87,14 +87,14 @@ const Timer = () => {
   function handelMillisecond (){
    if(activeStart === 'true'){
       if(milisec === 0){
-         setMiliSec(100 - 1)
+         setMiliSec(100)
          setTimeSec(timeSec -1)
       }else if( timeSec  === 0 &&  timeMin > 0){
-         setTimeSec(60 - 1)
-        setTimeMin(timeMin - 1)
+         setTimeSec(60-1)
+         setTimeMin(timeMin - 1)
        }else if(timeMin === 0 && timeHour > 0){
          setTimeHour(timeHour - 1)
-         setTimeMin(60) 
+         setTimeMin(60-1) 
        }else{
          setMiliSec(milisec - 1)
        }
@@ -106,9 +106,9 @@ const Timer = () => {
   return (
     <div className='timer-container'>
        {activeAlarm === 'true' && <div style={{backgroundColor: '#757474', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                      padding: '7px', borderRadius: '30px', position: 'absolute', top: '6%', float: 'left', zIndex: 100, width: '355px'}} onClick={()=> setActiveAlarm('false')}>
+                      padding: '7px', borderRadius: '30px', position: 'absolute', top: '8.7%', float: 'left', zIndex: 100, width: '375px'}} onClick={()=> setActiveAlarm('false')}>
             <div style={{display: 'flex',  marginLeft: '8px'}}>
-               <div><FaStopwatch20 style={{fontSize: '30px'}}/></div>
+               <div><FaStopwatch20 style={{fontSize: '33px'}}/></div>
                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',
                width: '50px', fontSize: '13px', color: '#1b1a1ad0', flexWrap: 'wrap'}}><div style={{fontWeight: 400, color: 'black'}}>Clock </div> <div>Timer</div></div>
             </div>

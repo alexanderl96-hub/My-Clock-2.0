@@ -288,7 +288,7 @@ function handelContries(e){
                             return(
                                 <div className="clock-container-card" >
                                     <div className="clock-container-card-first">
-                                        <div className="clock-container-card-first-Day">{a[0]} {a[5]}</div>
+                                        <div className="clock-container-card-first-Day">{a[5]} - {a[5]}</div>
                                         <div className="clock-container-card-first-Place">{a[1]}</div>
                                     </div>
 
