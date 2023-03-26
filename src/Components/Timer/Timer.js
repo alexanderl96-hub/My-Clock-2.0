@@ -36,7 +36,7 @@ const Timer = () => {
       setMinumun( minimun + (Number(e.target.value ) > 0 ? Number(e.target.value ) * (100) : 0))
   }
  console.log(minimun, 100/minimun, 'rest')
- const restingProgressBar = Math.abs(100 / minimun)
+ const restingProgressBar = Math.abs(99 / minimun)
 
 
  useEffect(()=>{
@@ -60,7 +60,7 @@ const Timer = () => {
          // setActivePause('true')
          clearInterval(interval); 
       }
-     ;}, 1);
+     ;}, 2);
      return ()=> clearInterval(interval);
     
       
@@ -90,11 +90,11 @@ const Timer = () => {
          setMiliSec(100)
          setTimeSec(timeSec -1)
       }else if( timeSec  === 0 &&  timeMin > 0){
-         setTimeSec(60-1)
+         setTimeSec(60)
          setTimeMin(timeMin - 1)
        }else if(timeMin === 0 && timeHour > 0){
          setTimeHour(timeHour - 1)
-         setTimeMin(60-1) 
+         setTimeMin(60) 
        }else{
          setMiliSec(milisec - 1)
        }
@@ -117,7 +117,8 @@ const Timer = () => {
        <div className='Timer-container-Main'>
           {activeStart === 'true' && <div  className='Timer-container-watcher'>
              <div className='Timer-container-CircleOutsite' 
-             style={{background : `conic-gradient(#b26903 ${ progressBar * 3.5 }deg, #434342 ${ progressBar * 3.5}deg)`,
+             style={{background : `conic-gradient(#b26903 ${ progressBar * 3.6 }deg, #434342 ${ progressBar * 3.6}deg)`,
+             transitionDuration: '500ms', transitionProperty: 'background'
               }}>
                 <div className='Timer-container-CircleInside'>
                   <div className='Timer-container-CircleInside-time'>
@@ -140,8 +141,9 @@ const Timer = () => {
                   <div className='Timer-container-watcher-Input-divHolder'>
                      <select className='timer-map-hours' onChange={handelValue} >{hours.map((a)=>{
                         return(
+                           // < div style={{margin: '8px'}} onMouseOver={handelValue}>{a}</div>
                            <>
-                           {/* // < div style={{margin: '8px'}} onMouseOver={handelValue}> */}
+                           
                            {/* { a > 23 &&  <option value={a}  onClick={handelValue}  style={{fontSize: '25px',color: 'transparent'}}>{a}</option>   } */}
                            <option value={a} >{a}</option>
                            {/* // </div> */}
